@@ -1,1 +1,16 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+EX0:
+Break- a red dot appears wnen hovering to the left of the line numbers
+
+Breaks runs from top to break and helps identify errors, must untick the red dot to run the whole thing
+
+Debug console has a play button to run the code
+
+If you dont save the code and run, changes wont be made when you run
+
+To make uppercase, define x -> x.upper() -> to add characters, + "x"
+
+Must convert numbers to strings when writing with words ->str(number)
+
+EX2: After def must put a colon
+
+EX3: if, else etc all need a colon
