@@ -17,6 +17,8 @@ EX3: if, else etc all need a colon
 
 something.append adds to a set
 
+why does this work??
+
 wedge = []
     numbers = []
     for i in range(10):

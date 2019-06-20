@@ -226,11 +226,19 @@ def loops_7():
     lots of diagrams!
     """
     triangle = []
-    star = []
-    for no.stars in range(1,10,2):
-
-
-
+    row = []
+    for number_of_stars in range(1,10,2):
+        for col in range(1,10):
+            gap = int((9-number_of_stars)/2)
+            if col <= gap:
+                row.append(' ')
+            elif col > gap+number_of_stars:
+                row.append(' ')
+            else:
+                row.append('*')
+        triangle.append(row)
+        row = []
+    return triangle
 
 def lp(some_kind_of_list, exercise_name):
     """Help to see what's going on.
