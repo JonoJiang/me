@@ -171,8 +171,8 @@ def loops_5():
     you'll come to see the pros and cons of each over time.
     """
     coord = [('(i'+str(x) + ', j'+str(y) + ')') for x in range(10) for y in range(5)]
-    chunks = [coord[i:i+5] for i in range(0, len(coord), 5)]
-    return chunks
+    box = [coord[i:i+5] for i in range(0, len(coord), 5)]
+    return box
 
 
 def loops_6():
@@ -195,13 +195,14 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    y = []
-    i = 0
-    while i < 10:
-        y.append(i)
-        i = i + 1
-        print(y)
-    
+    wedge = []
+    step = []
+    for row in range(1,11):
+        for col in range(0, row):
+            step.append(str(col))
+        wedge.append(step)
+        step = []
+    return wedge
 
 def loops_7():
     """Make a pyramid.
@@ -224,7 +225,11 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-   
+    triangle = []
+    star = []
+    for no.stars in range(1,10,2):
+
+
 
 
 def lp(some_kind_of_list, exercise_name):

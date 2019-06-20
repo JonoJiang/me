@@ -14,3 +14,12 @@ Must convert numbers to strings when writing with words ->str(number)
 EX2: After def must put a colon
 
 EX3: if, else etc all need a colon
+
+something.append adds to a set
+
+wedge = []
+    numbers = []
+    for i in range(10):
+        numbers.append(str(i))
+        wedge.append((numbers)*1)
+    return(wedge)
