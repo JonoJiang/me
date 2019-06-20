@@ -115,9 +115,8 @@ def loops_3():
     """
     box = []
     numbers = []
-    for x in range(10):
-        numbers.append(x)*10
     for i in range(10):
+        numbers = [str(i)]*10
         box.append(numbers)
     return box
 
