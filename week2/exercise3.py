@@ -170,7 +170,7 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    coord = [('(i'+str(x)+ ',j'+str(y) + ')') for x in range(10) for y in range(5)]
+    coord = [('(i'+str(x) + ', j'+str(y) + ')') for x in range(10) for y in range(5)]
     chunks = [coord[i:i+5] for i in range(0, len(coord), 5)]
     return chunks
 
