@@ -1,1 +1,2 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+int(x) defines a variable as a number
+
