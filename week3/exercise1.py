@@ -65,11 +65,7 @@ def stubborn_asker(low, high):
         else:
             print("You got it!")
             guessed = True
-    return "You got it!"
-
-
-
-
+    return guessedNumber
 
 def not_number_rejector(message):
     """Ask for a number repeatedly until actually given one.
@@ -78,7 +74,15 @@ def not_number_rejector(message):
     (e.g. "cow", "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    return None
+    while True:
+        guessedNumber = input(message)
+        print("You guessed {},".format(guessedNumber),)
+        try:
+            guessedNumber = int(guessedNumber)
+            print("Good Work")
+            return guessedNumber
+        except Exception as e:
+            print("that is not a number")
 
 
 def super_asker(low, high):
@@ -89,8 +93,12 @@ def super_asker(low, high):
     Try to call at least one of the other functions to minimise the
     amount of code.
     """
-    return None
-
+    while True:
+        answer = not_number_rejector("Enter a number between "+str(low)+" and " +str(high)+":")
+        if low <= answer <= high:
+            return answer
+        else: print("But it's not in the range")
+            
 
 if __name__ == "__main__":
     # this section does a quick test on your results and prints them nicely.
