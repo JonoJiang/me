@@ -1,4 +1,3 @@
-EX0:
 Break- a red dot appears wnen hovering to the left of the line numbers
 
 Breaks runs from top to break and helps identify errors, must untick the red dot to run the whole thing
@@ -11,9 +10,7 @@ To make uppercase, define x -> x.upper() -> to add characters, + "x"
 
 Must convert numbers to strings when writing with words ->str(number)
 
-EX2: After def must put a colon
-
-EX3: if, else etc all need a colon
+After any function (purple) must put :
 
 something.append adds to a set
 
