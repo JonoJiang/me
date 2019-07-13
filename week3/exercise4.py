@@ -36,7 +36,7 @@ def binary_search(low, high, actual_number):
                 high = midpoint - 1
                 tries = tries + 1
             else:
-                print('Guess No.{}: {}'.format(tries + 1, midpoint))
+                print('Guess No.{}:{}'.format(tries + 1, midpoint))
                 low = midpoint + 1
                 tries = tries + 1
                 
