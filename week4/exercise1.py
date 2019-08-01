@@ -81,6 +81,20 @@ def wordy_pyramid():
     """
     pass
 
+    word_pyramid=[]
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={length}"
+    for l in range(3,21,2):
+        words_api = url.format(base = url, length = l)
+        r = requests.get(words_api)
+        if r.status_code is 200:
+            word_pyramid.append(r.text)
+    for l in range(0,21,2):
+        words_api = url.format(base = url, length = 20-l)
+        r = requests.get(words_api)
+        if r.status_code is 200:
+            word_pyramid.append(r.text)
+    return(word_pyramid)
+
 
 def pokedex(low=1, high=5):
     """ Return the name, height and weight of the tallest pokemon in the range low to high.
@@ -98,11 +112,17 @@ def pokedex(low=1, high=5):
     """
     template = "https://pokeapi.co/api/v2/pokemon/{id}"
 
-    url = template.format(base=base, id=5)
-    r = requests.get(url)
-    if r.status_code is 200:
-        the_json = json.loads(r.text)
-    return {"name": None, "weight": None, "height": None}
+    max_height = -1
+    pokeID = 0
+    for pokeID in range(low,high):
+        url = template.format(base=template, id=pokeID)
+        r = requests.get(url)
+        if r.status_code is 200:
+            poke = json.loads(r.text)
+            if int(poke["height"]) > max_height:
+                max_height = poke["height"]
+                tallest_poke = poke
+    return {"name": tallest_poke["name"], "weight": tallest_poke["weight"], "height": tallest_poke["height"]}
 
 
 def diarist():
@@ -121,6 +141,18 @@ def diarist():
     """
     pass
 
+    count=0
+    with open("week4/Trispokedovetiles(laser).gcode", "r") as f_gcode:
+        data = f_gcode.readlines()
+        for n in range(len(data)):
+            if data[n] == "M10 P1\n":
+                count=count+1
+            elif data[n] == "M10 P1 (turns laser OFF)\n":
+                count=count+1
+        mode = "w"
+        pew = open("week4/lasers.pew", "w")
+        pew.write(str(count)) 
+        pew.close()
 
 if __name__ == "__main__":
     functions = [
