@@ -80,8 +80,8 @@ def calculate_area(base, height):
 
 
 def calculate_perimeter(base, height):
-    perimiter = int(base) + int(height) + sqrt(int(base)**2 + int(height)**2)
-    return perimiter
+    perimeter = int(base) + int(height) + sqrt(int(base)**2 + int(height)**2)
+    return perimeter
     
 
 
