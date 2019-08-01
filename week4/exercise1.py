@@ -88,8 +88,8 @@ def wordy_pyramid():
         r = requests.get(words_api)
         if r.status_code is 200:
             word_pyramid.append(r.text)
-    for l in range(0,21,2):
-        words_api = url.format(base = url, length = 20-l)
+    for l in range(20,3,-2):
+        words_api = url.format(base = url, length = l)
         r = requests.get(words_api)
         if r.status_code is 200:
             word_pyramid.append(r.text)
@@ -149,7 +149,6 @@ def diarist():
                 count=count+1
             elif data[n] == "M10 P1 (turns laser OFF)\n":
                 count=count+1
-        mode = "w"
         pew = open("week4/lasers.pew", "w")
         pew.write(str(count)) 
         pew.close()
