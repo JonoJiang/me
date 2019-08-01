@@ -50,9 +50,8 @@ def do_bunch_of_bad_things():
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
 
-    count = []
-    for i in range(start, stop, -1):
-        print(message + str(i))
+    for i in range(start, stop-1, -1):
+        print(message + " " + str(i))
     print(completion_message)
     pass
 
@@ -66,33 +65,48 @@ def countdown(message, start, stop, completion_message):
 # turned off by default but turned on with an optional argument.
 # The stub functions are made for you, and each one is tested, so this should
 # hand hold quite nicely.
-def calculate_hypotenuse(base, height):
-    pass
 
+from math import sqrt
+
+def calculate_hypotenuse(base, height):
+    hypotenuse = sqrt(int(base)**2 + int(height)**2)
+    return hypotenuse
+    
 
 def calculate_area(base, height):
-    pass
+    area = 0.5*int(base)*int(height)
+    return area
+    
 
 
 def calculate_perimeter(base, height):
-    pass
+    perimiter = int(base) + int(height) + sqrt(int(base)**2 + int(height)**2)
+    return perimiter
+    
 
 
 def calculate_aspect(base, height):
-    pass
+    if base > height:
+        aspect = "wide"
+    elif base < height:
+        aspect = "tall"
+    else:
+        aspect = "equal"
+    return aspect
+    
 
 
 # Make sure you reuse the functions you've already got
 # Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
     return {
-        "area": None,
-        "perimeter": None,
-        "height": None,
-        "base": None,
-        "hypotenuse": None,
-        "aspect": None,
-        "units": None,
+        "area": calculate_area(base, height),
+        "perimeter": calculate_perimeter(base, height),
+        "height": height,
+        "base": base,
+        "hypotenuse": calculate_hypotenuse(base, height),
+        "aspect": calculate_aspect(base, height),
+        "units": units,
     }
 
 
@@ -143,56 +157,82 @@ def tell_me_about_this_right_triangle(facts_dictionary):
         "This is a {aspect} triangle.\n"
     )
 
+    
+    if facts_dictionary["aspect"] == "tall":
+        diagram = tall.format(**facts_dictionary)
+    elif facts_dictionary["aspect"] == "wide":
+        diagram = wide.format(**facts_dictionary)
+    else:
+        diagram = equal.format(**facts_dictionary)
     facts = pattern.format(**facts_dictionary)
+    return( diagram + "\n" + facts)
+   
 
 
 def triangle_master(base, height, return_diagram=False, return_dictionary=False):
+    f=get_triangle_facts(base, height)
+    d=tell_me_about_this_right_triangle(f)
     if return_diagram and return_dictionary:
-        return None
+        return {"diagram": d, "facts":f}
     elif return_diagram:
-        return None
+        return d
     elif return_dictionary:
-        return None
+        return f
     else:
         print("You're an odd one, you don't want anything!")
 
 
 def wordy_pyramid(api_key):
-    import requests
+    #import requests
 
-    baseURL = (
-        "http://api.wordnik.com/v4/words.json/randomWords?"
-        "api_key={api_key}"
-        "&minLength={length}"
-        "&maxLength={length}"
-        "&limit=1"
-    )
-    pyramid_list = []
-    for i in range(3, 21, 2):
-        url = baseURL.format(api_key="", length=i)
-        r = requests.get(url)
-        if r.status_code is 200:
-            message = r.json()[0]["word"]
-            pyramid_list.append(message)
-        else:
-            print("failed a request", r.status_code, i)
-    for i in range(20, 3, -2):
-        url = baseURL.format(api_key="", length=i)
-        r = requests.get(url)
-        if r.status_code is 200:
-            message = r.json()[0]["word"]
-            pyramid_list.append(message)
-        else:
-            print("failed a request", r.status_code, i)
-    return pyramid_list
+    #baseURL = (
+    #    "http://api.wordnik.com/v4/words.json/randomWords?"
+    #    "api_key={api_key}"
+    #    "&minLength={length}"
+    #    "&maxLength={length}"
+    #    "&limit=1"
+    #)
+    #pyramid_list = []
+    #for i in range(3, 21, 2):
+    #    url = baseURL.format(api_key="", length=i)
+    #    r = requests.get(url)
+    #    if r.status_code is 200:
+    #        message = r.json()[0]["word"]
+    #       pyramid_list.append(message)
+    #    else:
+    #        print("failed a request", r.status_code, i)
+    #for i in range(20, 3, -2):
+    #    url = baseURL.format(api_key="", length=i)
+    #    r = requests.get(url)
+    #    if r.status_code is 200:
+    #        message = r.json()[0]["word"]
+    #        pyramid_list.append(message)
+    #    else:
+    #        print("failed a request", r.status_code, i)
+    #return pyramid_list
 
+    pass
 
 def get_a_word_of_length_n(length):
-    pass
-
+    import requests
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={l}"
+    word_api = url.format(base=url, l=length)
+    r = requests.get(word_api)
+    if r.status_code is 200:
+        return r.text
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    print(list_of_lengths)
+    import requests
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={ID}"
+    word_list = []
+    for n in range(len(list_of_lengths)):
+        l = list_of_lengths[n]
+        word_api = url.format(base=url, ID=l)
+        r = requests.get(word_api)
+        if r.status_code is 200:
+            word_list.append(r.text)
+    return word_list
 
 
 if __name__ == "__main__":
