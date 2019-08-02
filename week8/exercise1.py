@@ -121,8 +121,24 @@ def make_filler_text_dictionary():
     """
 
     import requests
-    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={l}"
-    return {}
+    filler_dictionary = {
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: []
+    }
+    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={x}"
+    for l in range(3,8):
+        api = url.format(x = l)
+        temp_list = []
+        for i in range(0,3):
+            r=requests.get(api)
+            if r.status_code is 200:
+                word = r.text
+            temp_list.append(word)
+        filler_dictionary.update( {l:temp_list} )
+    return filler_dictionary
 
 
 def random_filler_text(number_of_words=200):
@@ -136,9 +152,13 @@ def random_filler_text(number_of_words=200):
         see line 77 of week4/hangman_leadboard.py for an example.
     """
     import random
-
-    return ""
-
+    my_list = []
+    dict2 = make_filler_text_dictionary()
+    for i in range(0, number_of_words):
+        x1 = random.randint(3,7)
+        x2 = random.randint(0,2)
+        my_list.append(dict2[x1][x2])
+    return(', '.join(my_list))
 
 def fast_filler(number_of_words=200):
     """Reimplement random_filler_text.
@@ -154,7 +174,9 @@ def fast_filler(number_of_words=200):
 
     If you get this one to work, you are a Very Good Programmer™!
     """
-
+    d = open("dict_racey.json", "w")
+    d.write(make_filler_text_dictionary)
+    d.close()
     return paragraph
 
 
