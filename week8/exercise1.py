@@ -174,10 +174,29 @@ def fast_filler(number_of_words=200):
 
     If you get this one to work, you are a Very Good Programmer™!
     """
-    d = open("dict_racey.json", "w")
-    d.write(make_filler_text_dictionary)
-    d.close()
-    return paragraph
+    import random
+    import json
+    import os
+    
+    fastdict = make_filler_text_dictionary
+    stringpara = []
+
+    if os.path.isfile('dict_racey.json'):
+        print('loading')
+    else:
+        d = open("week8/dict_racey.json", "w")
+        dumping = json.dumps(fastdict)
+        d.write(dumping)
+        d.close()
+    d = open("week8/dict_racey.json", "r")
+    content = f.read
+    reads = json.loads(content)
+    for i in range (0, number_of_words)
+        keyer = str(random,randint(3,7))
+        worder = random.randint(0, 2)
+        stringpara.append(reads[keyer][worder])
+    return(' '.join(stringpara))
+
 
 
 if __name__ == "__main__":
