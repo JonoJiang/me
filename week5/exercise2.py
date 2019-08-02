@@ -9,7 +9,7 @@ import turtle
 
 
 def italian_dinner(axiom="tomatoes", guard=6):
-    """Make recursive dinner plans.
+    """Make recursive `dinner plans.
 
     This is an example to help you get your head around the idea of recursion.
 
