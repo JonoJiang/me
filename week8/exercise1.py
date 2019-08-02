@@ -189,9 +189,9 @@ def fast_filler(number_of_words=200):
         d.write(dumping)
         d.close()
     d = open("week8/dict_racey.json", "r")
-    content = f.read
+    content = d.read
     reads = json.loads(content)
-    for i in range (0, number_of_words)
+    for i in range (0, number_of_words):
         keyer = str(random,randint(3,7))
         worder = random.randint(0, 2)
         stringpara.append(reads[keyer][worder])
